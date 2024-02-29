@@ -55,7 +55,7 @@ def incremental():
     print("\n\n")
     print(Fore.MAGENTA + "Please choose what type of character list you want to use to brute force" )
     
-    print(Fore.RED + "Speed Ratings")
+    print(Fore.RED + "\n[Speed Ratings]\n")
     quickest = Fore.BLUE + " [quickest]"
     quick = Fore.MAGENTA + " [quick]"
     moderate = Fore.WHITE + " [moderate]"
@@ -76,10 +76,10 @@ def incremental():
     print(Fore.CYAN + "6.) ", Fore.RED + "uppercase letters and numbers a-z 0-9 (36 chars)", quick)
     print(Fore.CYAN + "7.) ", Fore.RED + "uppercase letters, numbers, and some symbols a-z 0-9 !?@#$%& (43 chars)", quick)
     print(Fore.CYAN + "8.) ", Fore.RED + "uppercase letters, numbers, and all symbols a-z 0-9 (68 chars)", slow)
-    print(Fore.CYAN + "1.) ", Fore.RED + "all letters a-z A-Z (52 chars)", moderate)
-    print(Fore.CYAN + "2.) ", Fore.RED + "all letters and numbers a-z A-Z 0-9 (62 chars)", slow)
-    print(Fore.CYAN + "3.) ", Fore.RED + "all letters, numbers, and some symbols a-z A-Z 0-9 !?@#$%& (69 chars)", slow)
-    print(Fore.CYAN + "4.) ", Fore.RED + "all letters, numbers, and all symbols a-z A-Z 0-9 (94 chars)", slowest)    
+    print(Fore.CYAN + "9.) ", Fore.RED + "all letters a-z A-Z (52 chars)", moderate)
+    print(Fore.CYAN + "10.) ", Fore.RED + "all letters and numbers a-z A-Z 0-9 (62 chars)", slow)
+    print(Fore.CYAN + "11.) ", Fore.RED + "all letters, numbers, and some symbols a-z A-Z 0-9 !?@#$%& (69 chars)", slow)
+    print(Fore.CYAN + "12.) ", Fore.RED + "all letters, numbers, and all symbols a-z A-Z 0-9 (94 chars)", slowest)    
     print(Fore.CYAN + "99.) ", Fore.RED + "return to main menu")
     print()
 
