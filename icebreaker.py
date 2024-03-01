@@ -21,8 +21,7 @@ def bruteforce():
     # Will most likely have system commands to interact with password protected file
     return
 
-def charTables():
-    
+def charTables(charOption):
     
     charlist1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     
@@ -48,49 +47,114 @@ def charTables():
 
     charlist12 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l","m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L","M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "!", "@", "#", "$", "%", "?", "&", "*", "~", "'", "^", "(", ")", "_", "-", "+","=", "{", "[", "}", "]", "|", ":", ";", '"', ",", ".", "<", ">", "/", "`", "\\"]
 
+    if charOption == 1:
+        characterTable = charlist1
+        return characterTable
+
+    if charOption == 2:
+        characterTable = charlist2
+        return characterTable
+
+    if charOption == 3:
+        characterTable = charlist3
+        return characterTable
+
+    if charOption == 4:
+        characterTable = charlist4
+        return characterTable
+
+    if charOption == 5:
+        characterTable = charlist5
+        return characterTable
+
+    if charOption == 6:
+        characterTable = charlist6
+        return characterTable
+
+    if charOption == 7:
+        characterTable = charlist7
+        return characterTable
+
+    if charOption == 8:
+        characterTable = charlist8
+        return characterTable
+    
+    if charOption == 9:
+        characterTable = charlist9
+        return characterTable
+
+    if charOption == 10:
+        characterTable = charlist10
+        return characterTable
+
+    if charOption == 11:
+        characterTable = charlist11
+        return characterTable
+
+    if charOption == 12:
+        characterTable = charlist12
+        return characterTable
+
     Exiting()
 
 def incremental():
     
-    print("\n\n")
-    print(Fore.MAGENTA + "Please choose what type of character list you want to use to brute force" )
+    while 1 == 1:   
+        print("\n\n")
+        print(Fore.MAGENTA + "Please choose what type of character list you want to use to brute force" )
     
-    print(Fore.RED + "\n[Speed Ratings]\n")
-    quickest = Fore.BLUE + " [quickest]"
-    quick = Fore.MAGENTA + " [quick]"
-    moderate = Fore.WHITE + " [moderate]"
-    slow = Fore.GREEN + " [slow]"
-    slowest = Fore.YELLOW + " [slowest]"
+        print(Fore.RED + "\n[Speed Ratings]\n")
+        quickest = Fore.BLUE + " [quickest]"
+        quick = Fore.MAGENTA + " [quick]"
+        moderate = Fore.WHITE + " [moderate]"
+        slow = Fore.GREEN + " [slow]"
+        slowest = Fore.YELLOW + " [slowest]"
 
-    print(quickest, Fore.RED + "Number of trials needed (8 character pass length) n < 300,000,000,000")
-    print(quick, Fore.RED + "Number of trials needed (8 character pass length) n < 12,000,000,000,000")
-    print(moderate, Fore.RED + "Number of trials needed (8 character pass length) n < 60,000,000,000,000")
-    print(slow, Fore.RED + "Number of trials needed (8 character pass length) n < 520,000,000,000,000")
-    print(slowest, Fore.RED + "Number of trials needed (8 character pass length) n < 6,100,000,000,000,000 \n\n")
+        print(quickest, Fore.RED + "Number of trials needed (8 character pass length) n < 300,000,000,000")
+        print(quick, Fore.RED + "Number of trials needed (8 character pass length) n < 12,000,000,000,000")
+        print(moderate, Fore.RED + "Number of trials needed (8 character pass length) n < 60,000,000,000,000")
+        print(slow, Fore.RED + "Number of trials needed (8 character pass length) n < 520,000,000,000,000")
+        print(slowest, Fore.RED + "Number of trials needed (8 character pass length) n < 6,100,000,000,000,000 \n\n")
     
-    print(Fore.CYAN + "1.) ", Fore.RED + "lowercase letters only a-z (26 chars)", quickest)
-    print(Fore.CYAN + "2.) ", Fore.RED + "lowercase letters and numbers a-z 0-9 (36 chars)", quick)
-    print(Fore.CYAN + "3.) ", Fore.RED + "lowercase letters, numbers, and some symbols a-z 0-9 !?@#$%& (43 chars)", quick)
-    print(Fore.CYAN + "4.) ", Fore.RED + "lowercase letters, numbers, and all symbols a-z 0-9 (68 chars)", slow)
-    print(Fore.CYAN + "5.) ", Fore.RED + "uppercase letters only a-z (26 chars)", quickest)
-    print(Fore.CYAN + "6.) ", Fore.RED + "uppercase letters and numbers a-z 0-9 (36 chars)", quick)
-    print(Fore.CYAN + "7.) ", Fore.RED + "uppercase letters, numbers, and some symbols a-z 0-9 !?@#$%& (43 chars)", quick)
-    print(Fore.CYAN + "8.) ", Fore.RED + "uppercase letters, numbers, and all symbols a-z 0-9 (68 chars)", slow)
-    print(Fore.CYAN + "9.) ", Fore.RED + "all letters a-z A-Z (52 chars)", moderate)
-    print(Fore.CYAN + "10.) ", Fore.RED + "all letters and numbers a-z A-Z 0-9 (62 chars)", slow)
-    print(Fore.CYAN + "11.) ", Fore.RED + "all letters, numbers, and some symbols a-z A-Z 0-9 !?@#$%& (69 chars)", slow)
-    print(Fore.CYAN + "12.) ", Fore.RED + "all letters, numbers, and all symbols a-z A-Z 0-9 (94 chars)", slowest)    
-    print(Fore.CYAN + "99.) ", Fore.RED + "return to main menu")
-    print()
+        print(Fore.CYAN + "1.) ", Fore.RED + " lowercase letters only a-z (26 chars)", quickest)
+        print(Fore.CYAN + "2.) ", Fore.RED + " lowercase letters and numbers a-z 0-9 (36 chars)", quick)
+        print(Fore.CYAN + "3.) ", Fore.RED + " lowercase letters, numbers, and some symbols a-z 0-9 !?@#$%& (43 chars)", quick)
+        print(Fore.CYAN + "4.) ", Fore.RED + " lowercase letters, numbers, and all symbols a-z 0-9 (68 chars)", slow)
+        print(Fore.CYAN + "5.) ", Fore.RED + " uppercase letters only a-z (26 chars)", quickest)
+        print(Fore.CYAN + "6.) ", Fore.RED + " uppercase letters and numbers a-z 0-9 (36 chars)", quick)
+        print(Fore.CYAN + "7.) ", Fore.RED + " uppercase letters, numbers, and some symbols a-z 0-9 !?@#$%& (43 chars)", quick)
+        print(Fore.CYAN + "8.) ", Fore.RED + " uppercase letters, numbers, and all symbols a-z 0-9 (68 chars)", slow)
+        print(Fore.CYAN + "9.) ", Fore.RED + " all letters a-z A-Z (52 chars)", moderate)
+        print(Fore.CYAN + "10.) ", Fore.RED + "all letters and numbers a-z A-Z 0-9 (62 chars)", slow)
+        print(Fore.CYAN + "11.) ", Fore.RED + "all letters, numbers, and some symbols a-z A-Z 0-9 !?@#$%& (69 chars)", slow)
+        print(Fore.CYAN + "12.) ", Fore.RED + "all letters, numbers, and all symbols a-z A-Z 0-9 (94 chars)", slowest)    
+        print(Fore.CYAN + "99.) ", Fore.RED + "return to main menu")
+        print()
 
-    hackOption = input(Fore.GREEN + "Bruteforce:Cracking Method" + Fore.RED + "> ")
-    charTables()
+        cOption = input(Fore.GREEN + "Bruteforce:Chartable select" + Fore.RED + "> ")
+        charOption = int(cOption)
+
+        if charOption > 0 and charOption < 13:
+            Table = charTables(charOption)
+            length = len(Table)
+            generate_passwords(Table, length)
+        else:
+            print(charOption, error)
+
 
     # This function will be responsible for generating unique passwords while
     # keeping track so it doesnt repeat itself.
     # This function must also be able to take parameters like the minimum password
     # length and maximum password length
     return
+
+def generate_passwords(cTable, leng):
+    print(cTable, leng)
+    passwords = []
+    for i in range(1, leng+1):
+        passwords.extend([''.join(x) for x in itertools.product(cTable, repeat=i)])
+    print(passwords)
+    exit()
 
 def wordlist():
     # This function will be responsible for using password files and wordlists and
@@ -100,44 +164,53 @@ def wordlist():
 def options():
     # This function will ask user whether they brute forcing WPA handshakes or
     # zip protected files
-    print("\n\n")
-    print(Fore.MAGENTA + "Please choose what type of files you wish to brute force" )
-    print(Fore.CYAN + "1.) ", Fore.RED + "Password Protected Files ")
-    print(Fore.CYAN + "2.) ", Fore.RED + "WPA handshake PCAP Files ")
-    print(Fore.CYAN + "99.) ", Fore.RED + "to exit out of program ")
-    print()    
-    fOption = input(Fore.GREEN + "Bruteforce:options" + Fore.RED + ">")
+    while 1 == 1:
+        print("\n\n")
+        print(Fore.MAGENTA + "Please choose what type of files you wish to brute force" )
+        print(Fore.CYAN + "1.) ", Fore.RED + " Password Protected Files ")
+        print(Fore.CYAN + "2.) ", Fore.RED + " WPA handshake PCAP Files ")
+        print(Fore.CYAN + "99.) ", Fore.RED + "To exit out of program ")
+        print()    
+        fOption = input(Fore.GREEN + "Bruteforce:options" + Fore.RED + ">")
     
-    if fOption == '1':
-        fileOptions()
-    if fOption == '2':
-        wpaOptions()
-    if fOption == '99':
-        Exiting()
+        if fOption == '1':
+            fileOptions()
+        if fOption == '2':
+            wpaOptions()
+        if fOption == '99':
+            Exiting()
+        else:
+            print(fOption, error)
 
 def fileOptions():
-    print("\n\n")
-    print(Fore.MAGENTA + "Please choose what type of brute forcing you intend to do" )
-    print(Fore.CYAN + "1.) ", Fore.RED + "Incremental ")
-    print(Fore.CYAN + "2.) ", Fore.RED + "Wordlists ")
-    print(Fore.CYAN + "99.) ", Fore.RED + "return to main menu")
-    print()
-
-    hackOption = input(Fore.GREEN + "Bruteforce:Cracking Method" + Fore.RED + "> ")
     
-    if hackOption == '1':
-        incremental()
-    if hackOption == '2':
-        wordlists()
-    if hackOption == '99':
-        options()
+    while 1 == 1:
+        print("\n\n")
+        print(Fore.MAGENTA + "Please choose what type of brute forcing you intend to do" )
+        print(Fore.CYAN + "1.) ", Fore.RED + " Incremental ")
+        print(Fore.CYAN + "2.) ", Fore.RED + " Wordlists ")
+        print(Fore.CYAN + "99.) ", Fore.RED + "Return to main menu")
+        print()
+
+        hackOption = input(Fore.GREEN + "Bruteforce:Cracking Method" + Fore.RED + "> ")
+    
+        if hackOption == '1':
+            incremental()
+        if hackOption == '2':
+            wordlists()
+        if hackOption == '99':
+            options()
+        else:
+            print(hackOption, error)
+
+
     # If user picked zip protected files they will be brought to this function
     # to decide whether they want to do incremental encryption or wordlist
     # cracking
     
 
 
-    return
+        return
 
 def wpaOptions():
     # WIP
@@ -172,4 +245,5 @@ def mainMenu():
 
     options()
 
+error = " is not an available choice please enter your desired option's number."
 mainMenu()
