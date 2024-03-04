@@ -1,9 +1,11 @@
 from colorama import Fore, Back, Style
 import os
+import os.path
 import time
 import itertools
 import string
 from os import system, name
+from checksumdir import dirhash
 
 def clear():
     if name == 'nt':
@@ -97,7 +99,7 @@ def charTables(charOption):
 
     Exiting()
 
-def incremental():
+def incremental(targetFile):
     
     while 1 == 1:   
         print("\n\n")
@@ -137,7 +139,9 @@ def incremental():
         if charOption > 0 and charOption < 13:
             Table = charTables(charOption)
             length = len(Table)
-            generate_passwords(Table, length)
+            init_gen(Table, length, targetFile)
+        if charOption == 99:
+            Exiting()
         else:
             print(charOption, error)
 
@@ -148,12 +152,56 @@ def incremental():
     # length and maximum password length
     return
 
-def generate_passwords(cTable, leng):
+def init_gen(cTable, leng, targetFile):
     print(cTable, leng)
-    passwords = []
-    for i in range(1, leng+1):
-        passwords.extend([''.join(x) for x in itertools.product(cTable, repeat=i)])
-    print(passwords)
+   
+    passlist = []
+
+    for i in range(0, leng):
+        passlist.append(cTable[i])
+    pslength = len(passlist)
+    generate_passwords(cTable, leng, passlist, pslength, targetFile)
+    exit()
+
+def generate_passwords(cTable, leng, passlist, pslength, targetFile):
+    
+    print(cTable, leng, passlist, pslength)
+    newPasslist = []
+    command = "unzip -P "
+    file = " hack-station/" + targetFile
+    directory = "hack-station"
+    md51 = dirhash(directory, 'md5')
+
+    for i in range(0, pslength):
+        for j in range(0, leng):
+            password = passlist[i] + '' + cTable[j]
+            pDisplay = Fore.CYAN + password
+            
+
+            print(pDisplay)
+            systemCommand = command + password + file + " -d hack-station/" 
+            os.system(systemCommand + " && N")
+            
+            md52 = dirhash(directory, 'md5')
+            if md51 != md52:
+                passFound(password)
+
+            newPasslist.append(passlist[i] + '' + cTable[j])
+             
+
+    newPLeng = len(newPasslist)
+    generate_passwords(cTable, leng, newPasslist, newPLeng, targetFile)
+    return
+
+def passFound(passw):
+    passwo = "     " + passw + "     "
+    password = passwo.center(70, "$")
+    for i in range(0,4):
+        print(Fore.BLUE + "$"*70)
+    print(Fore.CYAN + password)
+    for i in range(0,4):
+        print(Fore.BLUE + "$"*70)
+
     exit()
 
 def wordlist():
@@ -171,7 +219,7 @@ def options():
         print(Fore.CYAN + "2.) ", Fore.RED + " WPA handshake PCAP Files ")
         print(Fore.CYAN + "99.) ", Fore.RED + "To exit out of program ")
         print()    
-        fOption = input(Fore.GREEN + "Bruteforce:options" + Fore.RED + ">")
+        fOption = input(Fore.GREEN + "Bruteforce:options" + Fore.RED + "> ")
     
         if fOption == '1':
             fileOptions()
@@ -184,6 +232,27 @@ def options():
 
 def fileOptions():
     
+    t = os.system("pwd")
+    print(t)
+    while 1 == 1:
+        print(Fore.MAGENTA + "\nPlease enter password protected file you wish to crack ")
+        targetPath = input(Fore.GREEN + "\nBruteforce: File Select"+ Fore.RED + "> ")
+        
+        check = os.path.exists(targetPath)
+        
+        if check == False:
+            print("\n ERROR >>> File doesnt exist \n")
+        if check == True:
+            command = "cp "
+            command2 = " hack-station"
+            fCommand = command + targetPath + command2
+            
+            os.system(fCommand)
+            fTarget = targetPath.rfind("/")
+            targetFile = targetPath[fTarget+1:]
+            print(targetFile)
+            break
+
     while 1 == 1:
         print("\n\n")
         print(Fore.MAGENTA + "Please choose what type of brute forcing you intend to do" )
@@ -195,9 +264,9 @@ def fileOptions():
         hackOption = input(Fore.GREEN + "Bruteforce:Cracking Method" + Fore.RED + "> ")
     
         if hackOption == '1':
-            incremental()
+            incremental(targetFile)
         if hackOption == '2':
-            wordlists()
+            wordlists(targetFile)
         if hackOption == '99':
             options()
         else:
@@ -242,6 +311,10 @@ def mainMenu():
     print(Fore.RED + "[---]", Fore.BLUE + welM, Fore.RED + "[---]")
     print(Fore.RED + "[---]", Fore.BLUE + Ver, Fore.RED + "[---]")
     print(Fore.RED + "[---]", Fore.BLUE + Git, Fore.RED + "[---]")
+    
+    stCheck = "hackstation"
+    if os.path.exists(stCheck) == False:
+        os.system("mkdir hack-station")
 
     options()
 
