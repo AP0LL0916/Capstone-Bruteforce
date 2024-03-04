@@ -312,7 +312,7 @@ def mainMenu():
     print(Fore.RED + "[---]", Fore.BLUE + Ver, Fore.RED + "[---]")
     print(Fore.RED + "[---]", Fore.BLUE + Git, Fore.RED + "[---]")
     
-    stCheck = "hackstation"
+    stCheck = "hack-station"
     if os.path.exists(stCheck) == False:
         os.system("mkdir hack-station")
 
