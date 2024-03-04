@@ -1,5 +1,6 @@
 from colorama import Fore, Back, Style
 import os
+import zipfile
 import os.path
 import time
 import itertools
@@ -160,6 +161,7 @@ def init_gen(cTable, leng, targetFile):
     for i in range(0, leng):
         passlist.append(cTable[i])
     pslength = len(passlist)
+    CRCbypass(cTable, leng, passlist, pslength, targetFile)
     generate_passwords(cTable, leng, passlist, pslength, targetFile)
     exit()
 
@@ -167,7 +169,7 @@ def generate_passwords(cTable, leng, passlist, pslength, targetFile):
     
     print(cTable, leng, passlist, pslength)
     newPasslist = []
-    command = "unzip -P "
+    command = "unzip -o -P "
     file = " hack-station/" + targetFile
     directory = "hack-station"
     md51 = dirhash(directory, 'md5')
@@ -179,8 +181,18 @@ def generate_passwords(cTable, leng, passlist, pslength, targetFile):
             
 
             print(pDisplay)
-            systemCommand = command + password + file + " -d hack-station/" 
-            os.system(systemCommand + " && N")
+            bytePass = bytes(password, 'utf-8')
+            with zipfile.ZipFile(targetFile) as zf:
+                for name in zf.namelist():
+                    try:
+                        zf.extractall(path="hack-station", pwd = bytePass)
+                    except zipfile.BadZipFile as e:
+                        print("CRC CHECK WORKED")
+                        md52 = dirhash(directory, 'md5')
+                        
+
+                    except RuntimeError:
+                        print(Fore.MAGENTA + "[PASS CHECK FAILED]")
             
             md52 = dirhash(directory, 'md5')
             if md51 != md52:
@@ -193,7 +205,41 @@ def generate_passwords(cTable, leng, passlist, pslength, targetFile):
     generate_passwords(cTable, leng, newPasslist, newPLeng, targetFile)
     return
 
+def CRCbypass(cTable, leng, passlist, pslength, targetFile):
+    
+
+    file = " hack-station/" + targetFile
+    directory = "hack-station"
+    md51 = dirhash(directory, 'md5')
+
+    for i in range(0, pslength):
+        for j in range(0, leng):
+            password = passlist[i] + '' + cTable[j]
+            pDisplay = Fore.CYAN + password
+            
+
+            print(pDisplay)
+            bytePass = bytes(password, 'utf-8')
+            with zipfile.ZipFile(targetFile) as zf:
+                for name in zf.namelist():
+                    try:
+                        zf.extractall(path="hack-station", pwd = bytePass)
+                    except zipfile.BadZipFile as e:
+                        print("CRC CHECK WORKED")
+                        md52 = dirhash(directory, 'md5')
+                        
+
+                    except RuntimeError:
+                        print(Fore.MAGENTA + "[PASS CHECK FAILED]")    
+
+    return
+
 def passFound(passw):
+    
+    correctPass = Fore.YELLOW + "[PASSWORD FOUND]"
+    correctPassword = correctPass.center(73, " ")
+    print("\n", correctPassword ,"\n")
+
     passwo = "     " + passw + "     "
     password = passwo.center(70, "$")
     for i in range(0,4):
