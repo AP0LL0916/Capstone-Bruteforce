@@ -154,7 +154,7 @@ def init_gen(cTable, leng, targetFile):
     for i in range(0, leng):
         passlist.append(cTable[i])
     pslength = len(passlist)
-    CRCbypass(cTable, leng, passlist, pslength, targetFile)
+    CRCbypass(targetFile)
     generate_passwords(cTable, leng, passlist, pslength, targetFile)
     exit()
 
@@ -162,7 +162,6 @@ def generate_passwords(cTable, leng, passlist, pslength, targetFile):
     
     print(cTable, leng, passlist, pslength)
     newPasslist = []
-    command = "unzip -o -P "
     file = " hack-station/" + targetFile
     directory = "hack-station"
     md51 = dirhash(directory, 'md5')
@@ -198,33 +197,23 @@ def generate_passwords(cTable, leng, passlist, pslength, targetFile):
     generate_passwords(cTable, leng, newPasslist, newPLeng, targetFile)
     return
 
-def CRCbypass(cTable, leng, passlist, pslength, targetFile):
+def CRCbypass(targetFile):
     
+    for i in range(0, 10000):
+        passw = hash(i)
+        password = str(passw)
+        bytePass = bytes(password, 'utf-8')
+        crcFile = "hack-station/" + targetFile
+        with zipfile.ZipFile(crcFile) as zf:
+            for name in zf.namelist():
+                try:
+                    zf.extractall(path="hack-station", pwd = bytePass)
+                except zipfile.BadZipFile as e:
+                    print(Fore.GREEN + "[CRC DODGED]")
+                except RuntimeError:
+                    print(Fore.MAGENTA + "[PASS CHECK FAILED]")
 
-    file = " hack-station/" + targetFile
-    directory = "hack-station"
-    md51 = dirhash(directory, 'md5')
-
-    for i in range(0, pslength):
-        for j in range(0, leng):
-            password = passlist[i] + '' + cTable[j]
-            pDisplay = Fore.CYAN + password
-            
-
-            print(pDisplay)
-            bytePass = bytes(password, 'utf-8')
-            with zipfile.ZipFile(targetFile) as zf:
-                for name in zf.namelist():
-                    try:
-                        zf.extractall(path="hack-station", pwd = bytePass)
-                    except zipfile.BadZipFile as e:
-                        print(Fore.GREEN+"[CRC DODGED]")
-                        md52 = dirhash(directory, 'md5')
-                        
-
-                    except RuntimeError:
-                        print(Fore.MAGENTA + "[PASS CHECK FAILED]")    
-
+    
     return
 
 def passFound(passw):
@@ -279,6 +268,7 @@ def wordlistSelect(targetFile):
             n = 1
 
     if wOption > 0 and wOption < wlength+1:
+            CRCbypass(targetFile)
             wordlist(targetFile, wordlists[wOption-1])
     else:
         print("The option you chose is not available please try again.")
