@@ -1,13 +1,15 @@
-from colorama import Fore, Back, Style
-import os
-import zipfile
-import os.path
-import time
+from colorama import Fore, Back, Style # design choice, coloring output etc
+import os # allows you to pass system commands, interact with the system 
+import zipfile # what we are using to unzip the pass-protected zipfiles
+import os.path # to check OS type
+import time # debugging purposes
 import itertools
 import string
 from os import system, name
-from checksumdir import dirhash
+from checksumdir import dirhash # used for hashing
 
+
+# function used for clearing terminal output
 def clear():
     if name == 'nt':
         _ = system('cls')
@@ -18,7 +20,9 @@ def clear():
     return
 
 def charTables(charOption):
-    
+
+    # Function holding all the charlist arrays for incremental password cracking
+
     charlist1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     
     charlist2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l","m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -42,6 +46,8 @@ def charTables(charOption):
     charlist11 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l","m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L","M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "!", "@", "#", "$", "%", "?", "&", "*"]
 
     charlist12 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l","m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L","M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "!", "@", "#", "$", "%", "?", "&", "*", "~", "'", "^", "(", ")", "_", "-", "+","=", "{", "[", "}", "]", "|", ":", ";", '"', ",", ".", "<", ">", "/", "`", "\\"]
+
+    # If function for choosing charlist
 
     if charOption == 1:
         characterTable = charlist1
@@ -95,6 +101,8 @@ def charTables(charOption):
 
 def incremental(targetFile):
     
+    # Function to ask user for charlist to use for incremental
+
     while 1 == 1:   
         print("\n\n")
         print(Fore.MAGENTA + "Please choose what type of character list you want to use to brute force" )
@@ -139,18 +147,16 @@ def incremental(targetFile):
         else:
             print(charOption, error)
 
-
-    # This function will be responsible for generating unique passwords while
-    # keeping track so it doesnt repeat itself.
-    # This function must also be able to take parameters like the minimum password
-    # length and maximum password length
     return
 
 def init_gen(cTable, leng, targetFile):
+
+    # generates first pass list to initiate the recursive password gen
+
     print(cTable, leng)
    
     passlist = []
-
+    
     for i in range(0, leng):
         passlist.append(cTable[i])
     pslength = len(passlist)
@@ -160,6 +166,9 @@ def init_gen(cTable, leng, targetFile):
 
 def generate_passwords(cTable, leng, passlist, pslength, targetFile):
     
+    # A recursive function built upon a nested forloop to generate all password
+    # permutations
+
     print(cTable, leng, passlist, pslength)
     newPasslist = []
     file = " hack-station/" + targetFile
@@ -199,6 +208,9 @@ def generate_passwords(cTable, leng, passlist, pslength, targetFile):
 
 def CRCbypass(targetFile):
     
+    # Function to spit out all bad crc files to make sure bruteforce process
+    # isnt stopped
+
     for i in range(0, 10000):
         passw = hash(i)
         password = str(passw)
@@ -218,6 +230,8 @@ def CRCbypass(targetFile):
 
 def passFound(passw):
     
+    # Function to display password when found
+
     correctPass = Fore.YELLOW + "[PASSWORD FOUND]"
     correctPassword = correctPass.center(73, " ")
     print("\n", correctPassword ,"\n")
@@ -234,6 +248,8 @@ def passFound(passw):
 
 def wordlistSelect(targetFile):
     
+    # Function to select wordlist
+
     dir_path = "wordlists"
     
     wordlists = []
@@ -259,7 +275,7 @@ def wordlistSelect(targetFile):
             print("[",i+1,"] ", wordlists[i])
         print("\nEnter the number of the wordlist you wish to use.\n")
         listSelect = input(Fore.GREEN + "\nBruteforce:Wordlist Select" + Fore.RED + "> ")
-         
+         # exception handling for value errors
         try: 
             wOption = int(listSelect)
             n = 0
@@ -274,6 +290,9 @@ def wordlistSelect(targetFile):
         print("The option you chose is not available please try again.")
 
 def wordlist(targetFile, wFile):
+
+    #function to read wordlist file and test passwords
+
     print(wFile)
     print(targetFile)
     directory = "hack-station"
@@ -333,6 +352,8 @@ def options():
 
 def fileOptions():
     
+    # function to get file that user wants to brute force
+
     t = os.system("pwd")
     print(t)
     while 1 == 1:
@@ -341,6 +362,8 @@ def fileOptions():
         
         check = os.path.exists(targetPath)
         
+        # checks if file exists
+
         if check == False:
             print("\n ERROR >>> File doesnt exist \n")
         if check == True:
@@ -364,6 +387,8 @@ def fileOptions():
 
         hackOption = input(Fore.GREEN + "Bruteforce:Cracking Method" + Fore.RED + "> ")
     
+        # menu options
+
         if hackOption == '1':
             incremental(targetFile)
         if hackOption == '2':
@@ -401,6 +426,7 @@ def mainMenu():
     toolName = n.center(100, " ")
     print(Fore.WHITE + toolName)
 
+    # Fore. from colorama library
     welcomeMessage = Fore.MAGENTA + " " + Fore.YELLOW + "a python bruteforce tool "
     Version = Fore.MAGENTA + "Ver: " + Fore.YELLOW + " 1.0.0"
     Github = Fore.MAGENTA + "Github: " + Fore.YELLOW + "https://github.com/AP0LL0916/Capstone-Bruteforce "
@@ -421,3 +447,5 @@ def mainMenu():
 
 error = " is not an available choice please enter your desired option's number."
 mainMenu()
+
+
