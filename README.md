@@ -11,20 +11,29 @@ The Icebreaker Python program is a program developed by FIU students for a curri
 # Installation 
 **Git clone**
 ```bash
-git clone https://bitbucket.org/icebreaker-bruteforce-capstone/icebreaker-capstone/create-file/3401a4beef525fcecfa1bae0c0759fdc36021b77/Documents/?at=main
+git clone https://github.com/AP0LL0916/Capstone-Bruteforce
 ```
 Navigate to program
 ```bash
 cd icebreaker-bruteforce-capstone
 ```
+![ins](https://github.com/AP0LL0916/Capstone-Bruteforce/assets/116090905/440b2dc5-8d2b-48db-aaf3-4647e115f6c2)
+
 Pip install requirements.txt
 ```bash
 pip install -r requirements.txt
 ```
+![ins](https://github.com/AP0LL0916/Capstone-Bruteforce/assets/116090905/f1894629-1020-48bc-91a1-6ce685d1452b)
+
 Run icebreaker.py
 ```bash
 python icebreaker.py OR python3 icebreaker.py
 ```
+![ins](https://github.com/AP0LL0916/Capstone-Bruteforce/assets/116090905/58281a21-212c-45fe-94d4-3b339de97a52)
+
 
 # How to use
 The program is entirely controlled through a menu and it will guide you depending on what you want to do whether it is to crack a zip file with incremental bruteforcing or wordlist bruteforcing.
+
+
+
