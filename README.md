@@ -29,7 +29,8 @@ Run icebreaker.py
 ```bash
 python icebreaker.py OR python3 icebreaker.py
 ```
-![ins](https://github.com/AP0LL0916/Capstone-Bruteforce/assets/116090905/58281a21-212c-45fe-94d4-3b339de97a52)
+![image](https://github.com/AP0LL0916/Capstone-Bruteforce/assets/116090905/dccf33f1-d333-4266-bffa-2c4934fced50)
+
 
 
 # How to use
